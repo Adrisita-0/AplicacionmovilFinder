@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Mis Reservas | Hotel App</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.0/dist/sweetalert2.min.css">
+    <link rel="stylesheet" href="css/reservas.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <header class="main-header">
+            <a href="home.html" class="back-btn"><i class="fas fa-chevron-left"></i></a>
+            <h3>Mis Reservas</h3>
+            <span></span>
+        </header>
+
+        <div class="content">
+            <section class="reservations-section">
+                <h2>Próximas Reservas</h2>
+                <div class="reservations-list">
+                    <div class="reservation-card upcoming">
+                        <div class="card-header">
+                            <span class="room-name">Suite de Lujo</span>
+                            <span class="status-badge upcoming-badge">Confirmada</span>
+                        </div>
+                        <div class="card-details">
+                            <p>Entrada: <strong>15 de Octubre, 2025</strong></p>
+                            <p>Salida: <strong>20 de Octubre, 2025</strong></p>
+                            <p>Huéspedes: <strong>2 Adultos</strong></p>
+                            <p>Total: <strong>$1,750</strong></p>
+                        </div>
+                        <button class="cancel-btn" data-reservation-id="reserva1">Cancelar</button>
+                    </div>
+
+                    <div class="reservation-card upcoming">
+                        <div class="card-header">
+                            <span class="room-name">Habitación Doble</span>
+                            <span class="status-badge upcoming-badge">Pendiente</span>
+                        </div>
+                        <div class="card-details">
+                            <p>Entrada: <strong>2 de Noviembre, 2025</strong></p>
+                            <p>Salida: <strong>5 de Noviembre, 2025</strong></p>
+                            <p>Huéspedes: <strong>3 Adultos</strong></p>
+                            <p>Total: <strong>$540</strong></p>
+                        </div>
+                        <button class="cancel-btn" data-reservation-id="reserva2">Cancelar</button>
+                    </div>
+                </div>
+            </section>
+
+            <section class="reservations-section">
+                <h2>Reservas Anteriores</h2>
+                <div class="reservations-list">
+                    <div class="reservation-card past">
+                        <div class="card-header">
+                            <span class="room-name">Habitación Sencilla</span>
+                            <span class="status-badge past-badge">Completada</span>
+                        </div>
+                        <div class="card-details">
+                            <p>Entrada: <strong>20 de Agosto, 2025</strong></p>
+                            <p>Salida: <strong>22 de Agosto, 2025</strong></p>
+                            <p>Huéspedes: <strong>1 Adulto</strong></p>
+                            <p>Total: <strong>$240</strong></p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <nav class="main-nav">
+            <a href="home.html" class="nav-item"><i class="fas fa-home"></i> Inicio</a>
+            <a href="habitaciones.html" class="nav-item"><i class="fas fa-search"></i> Explorar</a>
+            <a href="reservas.html" class="nav-item active"><i class="fas fa-list-alt"></i> Reservas</a>
+            <a href="#" class="nav-item"><i class="fas fa-user-circle"></i> Perfil</a>
+        </nav>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.0/dist/sweetalert2.all.min.js"></script>
+    <script src="js/reservas.js"></script>
+</body>
+
+</html>

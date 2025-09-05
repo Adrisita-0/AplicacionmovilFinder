@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Habitaciones - Hotel Finder</title>
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+<body>
+    <header>
+        <h1>Hotel Finder - Habitaciones</h1>
+    </header>
+
+    <main>
+        <button id="btnAddRoom" class="btn-primary"><i class="fas fa-plus"></i> Añadir Habitación</button>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Tipo</th>
+                    <th>Precio</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="habitacionesTable">
+                <!-- Aquí se cargan las habitaciones dinámicamente -->
+            </tbody>
+        </table>
+    </main>
+
+    <!-- Modal para añadir/editar habitación -->
+    <div id="roomModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 id="modalTitle">Añadir Habitación</h2>
+            <form id="roomForm">
+                <label>Nombre:</label>
+                <input type="text" id="roomName" required>
+                <label>Tipo:</label>
+                <input type="text" id="roomType" required>
+                <label>Precio:</label>
+                <input type="number" id="roomPrice" required min="0">
+                <label>Estado:</label>
+                <select id="roomStatus" required>
+                    <option value="Disponible">Disponible</option>
+                    <option value="Ocupada">Ocupada</option>
+                    <option value="Mantenimiento">Mantenimiento</option>
+                </select>
+                <button type="submit" class="btn-primary">Guardar</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/habitaciones.js"></script>
+</body>
+
+</html>

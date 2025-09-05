@@ -1,0 +1,31 @@
+/* Estilos adicionales solo para habitaciones */
+.stars {
+    display: inline-flex;
+    gap: 2px;
+    vertical-align: middle
+}
+
+.star {
+    font-size: 1rem;
+    color: #f5c518
+}
+
+.star.muted {
+    color: #ddd
+}
+
+.review {
+    background: #fff;
+    border-radius: 14px;
+    padding: 10px;
+    margin: 10px 0;
+    box-shadow: var(--shadow)
+}
+
+.review .who {
+    font-weight: 700
+}
+
+.review .text {
+    color: var(--muted)
+}

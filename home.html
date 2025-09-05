@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Hotel Finder</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.0/dist/sweetalert2.min.css">
+    <link rel="stylesheet" href="css/home.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <header class="main-header">
+            <div class="user-info">
+                <img src="#" alt="User Profile" class="profile-pic">
+                <div class="greeting">
+                    <span>Bienvenida,</span>
+                    <span id="user-name">Adriana Aguilar</span>
+                </div>
+            </div>
+            <a href="#" class="notification-icon"><i class="fas fa-bell"></i></a>
+        </header>
+
+        <div class="content">
+            <div class="search-bar-container">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" id="search-input" placeholder="Buscar hotel, eventos o servicios...">
+            </div>
+
+            <section class="sections-grid">
+                <a href="habitaciones.html" class="section-item">
+                    <i class="fas fa-hotel"></i>
+                    <span>Habitaciones</span>
+                </a>
+                <a href="eventos.html" class="section-item">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span>Eventos</span>
+                </a>
+                <a href="reservas.html" class="section-item">
+                    <i class="fas fa-bookmark"></i>
+                    <span>Mis Reservas</span>
+                </a>
+                <a href="reseñas.html" class="section-item">
+                    <i class="fas fa-star"></i>
+                    <span>Reseñas</span>
+                </a>
+            </section>
+
+            <section class="trending-rooms">
+                <h3>Habitaciones Populares</h3>
+                <div id="trending-container" class="trending-list">
+                    <a href="#" class="trending-item" data-room-id="room1">
+                        <img src="https://images.unsplash.com/photo-1618773959110-244292153063?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                            alt="Suite de Lujo">
+                        <div class="trending-info">
+                            <h4>Suite de Lujo</h4>
+                            <div class="trending-rating">
+                                <span class="stars">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                        class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                                </span>
+                                <span class="reviews">(245 reseñas)</span>
+                            </div>
+                            <p class="trending-price">$350/noche</p>
+                        </div>
+                    </a>
+
+                    <a href="#" class="trending-item" data-room-id="room2">
+                        <img src="https://images.unsplash.com/photo-1596394516027-db56c703b7f1?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                            alt="Habitación Doble">
+                        <div class="trending-info">
+                            <h4>Habitación Doble</h4>
+                            <div class="trending-rating">
+                                <span class="stars">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                        class="fas fa-star"></i><i class="far fa-star"></i>
+                                </span>
+                                <span class="reviews">(180 reseñas)</span>
+                            </div>
+                            <p class="trending-price">$180/noche</p>
+                        </div>
+                    </a>
+
+                    <a href="#" class="trending-item" data-room-id="room3">
+                        <img src="https://images.unsplash.com/photo-1549488344-93c17a431521?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                            alt="Habitación Sencilla">
+                        <div class="trending-info">
+                            <h4>Habitación Sencilla</h4>
+                            <div class="trending-rating">
+                                <span class="stars">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                        class="fas fa-star"></i><i class="far fa-star"></i>
+                                </span>
+                                <span class="reviews">(95 reseñas)</span>
+                            </div>
+                            <p class="trending-price">$120/noche</p>
+                        </div>
+                    </a>
+                </div>
+            </section>
+        </div>
+
+        <nav class="main-nav">
+            <a href="home.html" class="nav-item active"><i class="fas fa-home"></i> Inicio</a>
+            <a href="habitaciones.html" class="nav-item"><i class="fas fa-search"></i> Explorar</a>
+            <a href="reservas.html" class="nav-item"><i class="fas fa-list-alt"></i> Reservas</a>
+            <a href="#" class="nav-item"><i class="fas fa-user-circle"></i> Perfil</a>
+        </nav>
+    </div>
+
+    <div id="room-details-modal" class="modal hidden">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <button class="modal-close-btn"><i class="fas fa-times"></i></button>
+            <img id="modal-room-image" src="" alt="Habitación" class="modal-image">
+            <div class="modal-body">
+                <h3 id="modal-room-name" class="modal-title"></h3>
+                <div class="modal-rating">
+                    <span id="modal-stars"></span>
+                    <span id="modal-reviews" class="reviews"></span>
+                </div>
+                <p id="modal-description" class="modal-description"></p>
+                <div class="modal-price" id="modal-price"></div>
+                <button id="modal-reserve-btn" class="modal-reserve-btn">
+                    Reservar ahora <i class="fas fa-plus"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="reservation-modal" class="modal hidden">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <button class="modal-close-btn"><i class="fas fa-times"></i></button>
+            <div class="modal-body">
+                <h3 class="modal-title">Confirmar Reserva</h3>
+                <p id="reservation-room-name" class="reservation-info-text"></p>
+                <div class="form-group">
+                    <label for="check-in-date">Entrada</label>
+                    <input type="date" id="check-in-date">
+                </div>
+                <div class="form-group">
+                    <label for="check-out-date">Salida</label>
+                    <input type="date" id="check-out-date">
+                </div>
+                <button id="confirm-reservation-btn" class="modal-reserve-btn">
+                    Confirmar Reserva
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.0/dist/sweetalert2.all.min.js"></script>
+    <script src="js/home.js"></script>
+</body>
+
+</html>

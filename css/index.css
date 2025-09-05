@@ -1,0 +1,112 @@
+z:root {
+    --primary-color: #2c3e50;
+    --text-color: #333;
+    --text-color-light: #fff;
+    --shadow-light: rgba(0, 0, 0, 0.1);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body {
+    height: 100%;
+    overflow: hidden;
+    background-color: #f5f7fa;
+}
+
+.app-container {
+    position: relative;
+    width: 100%;
+    /* Se eliminó el max-width: 500px; y margin: 0 auto; */
+    height: 100vh;
+    overflow: hidden;
+    background-color: white;
+    box-shadow: 0 0 20px var(--shadow-light);
+}
+
+.welcome-screen {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.welcome-image-container {
+    flex-basis: 60%;
+    position: relative;
+    overflow: hidden;
+}
+
+.welcome-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.welcome-content {
+    flex-basis: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+}
+
+.welcome-title {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--primary-color);
+}
+
+.welcome-subtitle {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 2rem;
+}
+
+.welcome-buttons {
+    width: 100%;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.welcome-btn {
+    padding: 15px 20px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    width: 100%;
+    text-align: center;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.welcome-btn:active {
+    transform: scale(0.98);
+}
+
+.welcome-btn-primary {
+    background-color: var(--primary-color);
+    color: var(--text-color-light);
+}
+
+.welcome-btn-primary:hover {
+    background-color: #1a252f;
+}
+
+.welcome-login-link {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+}

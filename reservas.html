@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Mis Reservas | Hotel App</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.0/dist/sweetalert2.min.css">
+    <link rel="stylesheet" href="css/reservas.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <header class="main-header">
+            <a href="home.html" class="back-btn"><i class="fas fa-chevron-left"></i></a>
+            <h3>Mis Reservas</h3>
+            <button id="add-reservation-btn" class="add-btn"><i class="fas fa-plus"></i></button>
+        </header>
+
+        <div class="content">
+            <section class="reservations-section">
+                <h2>Próximas Reservas</h2>
+                <div id="upcoming-reservations" class="reservations-list">
+                </div>
+            </section>
+
+            <section class="reservations-section">
+                <h2>Reservas Anteriores</h2>
+                <div id="past-reservations" class="reservations-list">
+                </div>
+            </section>
+        </div>
+
+        <nav class="main-nav">
+            <a href="home.html" class="nav-item"><i class="fas fa-home"></i> Inicio</a>
+            <a href="habitaciones.html" class="nav-item"><i class="fas fa-search"></i> Explorar</a>
+            <a href="reservas.html" class="nav-item active"><i class="fas fa-list-alt"></i> Reservas</a>
+            <a href="#" class="nav-item"><i class="fas fa-user-circle"></i> Perfil</a>
+        </nav>
+    </div>
+
+    <div id="reservation-modal" class="modal hidden">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <button class="modal-close-btn"><i class="fas fa-times"></i></button>
+            <div class="modal-body">
+                <h3 id="modal-title" class="modal-title"></h3>
+                <input type="hidden" id="reservation-id">
+
+                <div class="form-group">
+                    <label for="room-description">Habitación</label>
+                    <input type="text" id="room-description" placeholder="Ej: Suite de Lujo">
+                </div>
+                <div class="form-group">
+                    <label for="check-in-date">Entrada</label>
+                    <input type="datetime-local" id="check-in-date">
+                </div>
+                <div class="form-group">
+                    <label for="check-out-date">Salida</label>
+                    <input type="datetime-local" id="check-out-date">
+                </div>
+                <div class="form-group">
+                    <label for="reservation-comments">Comentarios</label>
+                    <textarea id="reservation-comments" rows="3" placeholder="Comentarios adicionales..."></textarea>
+                </div>
+
+                <button id="save-reservation-btn" class="modal-reserve-btn">Guardar</button>
+                <button id="delete-reservation-btn" class="delete-btn hidden">Eliminar</button>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.0/dist/sweetalert2.all.min.js"></script>
+<script src="js/reservas.js"></script>
+
+</html>
