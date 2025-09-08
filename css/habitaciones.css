@@ -1,31 +1,207 @@
-/* Estilos adicionales solo para habitaciones */
-.stars {
-    display: inline-flex;
-    gap: 2px;
-    vertical-align: middle
+:root {
+    --verde: #2b5550;
+    --naranja: #f7a83b;
+    --fondo: #eef2f6;
+    --card: #fff;
+    --texto: #333;
 }
 
-.star {
-    font-size: 1rem;
-    color: #f5c518
+* {
+    box-sizing: border-box
 }
 
-.star.muted {
-    color: #ddd
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    background: var(--fondo);
+    color: var(--texto);
 }
 
-.review {
-    background: #fff;
+.app-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: var(--verde);
+    color: #fff;
+}
+
+.app-header h2 {
+    margin: 0;
+    font-size: 1.2rem
+}
+
+.back-btn {
+    color: #fff;
+    font-size: 1.2rem;
+    text-decoration: none
+}
+
+.app-content {
+    padding: 1rem
+}
+
+.rooms-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+}
+
+@media(min-width:600px) {
+    .rooms-list {
+        grid-template-columns: 1fr 1fr
+    }
+}
+
+.room-card {
+    background: var(--card);
     border-radius: 14px;
-    padding: 10px;
-    margin: 10px 0;
-    box-shadow: var(--shadow)
+    padding: 1rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
-.review .who {
-    font-weight: 700
+.room-card h4 {
+    margin: 0 0 .5rem;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--verde)
 }
 
-.review .text {
-    color: var(--muted)
+.room-card p {
+    margin: .25rem 0;
+    font-size: .9rem;
+    color: #555
+}
+
+.reserve-btn {
+    margin-top: .7rem;
+    background: var(--naranja);
+    border: none;
+    padding: .5rem .9rem;
+    border-radius: 10px;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.reserve-btn:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
+
+/* ==== Modal ==== */
+.modal {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000
+}
+
+.modal.hidden {
+    display: none
+}
+
+.modal-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+}
+
+.modal-content {
+    position: relative;
+    background: var(--card);
+    border-radius: 16px;
+    width: 92%;
+    max-width: 420px;
+    padding: 1.2rem;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    animation: slideDown .25s ease;
+}
+
+.modal-close {
+    position: absolute;
+    right: 12px;
+    top: 12px;
+    border: none;
+    background: #f4f6f9;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--texto);
+}
+
+.modal-content h3 {
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 1rem;
+    color: var(--verde)
+}
+
+.modal-content label {
+    display: block;
+    font-weight: 600;
+    margin-top: .5rem
+}
+
+.modal-content input,
+.modal-content textarea {
+    width: 100%;
+    margin-top: .3rem;
+    padding: .55rem;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    font-size: .9rem;
+}
+
+.modal-content input:focus,
+.modal-content textarea:focus {
+    border-color: var(--verde);
+    box-shadow: 0 0 0 2px rgba(43, 85, 80, 0.2)
+}
+
+.modal-actions {
+    display: flex;
+    gap: .6rem;
+    margin-top: 1rem;
+    justify-content: flex-end
+}
+
+.save-btn {
+    background: var(--verde);
+    color: #fff;
+    border: none;
+    padding: .6rem .9rem;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600
+}
+
+.cancel-btn {
+    background: #ccc;
+    border: none;
+    padding: .6rem .9rem;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-15px);
+        opacity: 0
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1
+    }
 }

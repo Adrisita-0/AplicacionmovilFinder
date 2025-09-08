@@ -1,0 +1,236 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: #eef2f6;
+    color: #333;
+}
+
+.app-header {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    background-color: #2b5550;
+    /* verde oscuro */
+    color: #fff;
+}
+
+.app-header h2 {
+    flex: 1;
+    text-align: center;
+    font-weight: 600;
+}
+
+.back-btn {
+    color: #fff;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+
+/* Contenedor de eventos*/
+
+.app-content {
+    padding: 1rem;
+}
+
+.events-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.event-card {
+    background-color: #fff;
+    padding: 1rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: transform 0.2s;
+}
+
+.event-card:hover {
+    transform: translateY(-2px);
+}
+
+.event-card h4 {
+    font-weight: 600;
+}
+
+.event-card button {
+    background-color: #f7a83b;
+    /* naranja */
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.event-card button:hover {
+    background-color: #e6952b;
+}
+
+/*Modal*/
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    padding: 1rem;
+    background: rgba(0, 0, 0, 0.3);
+    /* fondo oscuro detrás del modal */
+}
+
+.modal.hidden {
+    display: none;
+}
+
+.modal-overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(2px);
+    top: 0;
+    left: 0;
+}
+
+.modal-content {
+    position: relative;
+    background-color: #fff;
+    border-radius: 16px;
+    padding: 2rem 1.5rem;
+    width: 100%;
+    max-width: 400px;
+    z-index: 10;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    animation: modalFade 0.3s ease;
+}
+
+@keyframes modalFade {
+    from {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Botón cerrar modal */
+.modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: #f7a83b;
+    /* naranja */
+    border: none;
+    color: #fff;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.modal-close:hover {
+    background-color: #e6952b;
+}
+
+/* Formulario modal */
+.modal-content form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.modal-content label {
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.modal-content input,
+.modal-content textarea {
+    padding: 0.6rem 0.8rem;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    font-size: 0.9rem;
+    width: 100%;
+    transition: border-color 0.3s;
+}
+
+.modal-content input:focus,
+.modal-content textarea:focus {
+    outline: none;
+    border-color: #2b5550;
+}
+
+/* Botones del modal */
+.modal-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+}
+
+.cancel-btn {
+    background-color: #ccc;
+    color: #333;
+    padding: 0.5rem 1rem;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    flex: 1;
+    margin-right: 0.5rem;
+    transition: background 0.3s;
+}
+
+.cancel-btn:hover {
+    background-color: #b3b3b3;
+}
+
+.save-btn {
+    background-color: #2b5550;
+    /* verde oscuro */
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    flex: 1;
+    margin-left: 0.5rem;
+
+}
+
+.save-btn:hover {
+    background-color: #244440;
+}
+
+
+@media(min-width: 600px) {
+    .events-list {
+        grid-template-columns: 1fr 1fr;
+    }
+}

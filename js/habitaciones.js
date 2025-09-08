@@ -1,110 +1,102 @@
-// ========================
-// CRUD de habitaciones
-// ========================
+/* habitaciones.js - Versión cliente para explorar y reservar habitaciones */
 
-// Simulación inicial (puedes reemplazar con fetch a la API)
+// Datos simulados (se puede reemplazar por fetch a la API)
 let habitaciones = [
-    { id: 1, nombre: "Suite Presidencial", precio: 2500, desc: "Incluye jacuzzi y vista al mar", reseñas: [{ usuario: "Ana", texto: "Hermosa habitación!", estrellas: 5 }] },
-    { id: 2, nombre: "Habitación Familiar", precio: 1500, desc: "4 camas y cocina equipada", reseñas: [{ usuario: "Carlos", texto: "Muy cómoda para la familia", estrellas: 4 }] }
+    { id: 1, numero: "101", tipo: "Suite", precio: 150, estado: "Disponible" },
+    { id: 2, numero: "102", tipo: "Doble", precio: 90, estado: "Ocupada" },
+    { id: 3, numero: "103", tipo: "Sencilla", precio: 70, estado: "Mantenimiento" }
 ];
 
-// Mostrar habitaciones
-function mostrarHabitaciones() {
-    const contenedor = document.querySelector(".cards");
-    contenedor.innerHTML = "";
-    habitaciones.forEach(hab => {
+// Referencias DOM
+const roomsContainer = document.getElementById("rooms-container");
+const modal = document.getElementById("reservation-modal");
+const overlay = document.getElementById("modal-overlay");
+const btnClose = document.getElementById("modal-close-btn");
+const btnCancel = document.getElementById("cancel-btn");
+const form = document.getElementById("reservation-form");
+
+const roomIdInput = document.getElementById("room-id");
+const roomInfo = document.getElementById("room-info");
+const checkin = document.getElementById("checkin");
+const checkout = document.getElementById("checkout");
+const comentarios = document.getElementById("comentarios");
+
+// Renderizar habitaciones
+function renderHabitaciones() {
+    roomsContainer.innerHTML = "";
+
+    habitaciones.forEach(h => {
         const card = document.createElement("div");
-        card.className = "card";
+        card.className = "room-card";
+
         card.innerHTML = `
-      <img src="https://picsum.photos/400/250?random=${hab.id + 10}" alt="${hab.nombre}">
-      <div class="card-body">
-        <h3>${hab.nombre}</h3>
-        <p>${hab.desc}</p>
-        <div class="stars">${dibujarEstrellas(promedioEstrellas(hab.reseñas))}</div>
-        <div class="card-footer">
-          <span>$${hab.precio}</span>
-          <button class="btn-book" onclick="editarHabitacion(${hab.id})">Editar</button>
-        </div>
-      </div>
+      <h4>Habitación ${h.numero} - ${h.tipo}</h4>
+      <p><i class="fas fa-dollar-sign"></i> $${h.precio} / noche</p>
+      <p><i class="fas fa-door-closed"></i> ${h.estado}</p>
+      <button class="reserve-btn" ${h.estado !== "Disponible" ? "disabled" : ""} data-id="${h.id}">
+        ${h.estado === "Disponible" ? "Reservar" : "No disponible"}
+      </button>
     `;
-        contenedor.appendChild(card);
+
+        roomsContainer.appendChild(card);
+    });
+
+    document.querySelectorAll(".reserve-btn").forEach(btn => {
+        btn.addEventListener("click", (e) => {
+            const id = e.currentTarget.dataset.id;
+            openModal(id);
+        });
     });
 }
 
-// Dibujar estrellas
-function dibujarEstrellas(num) {
-    let html = "";
-    for (let i = 1; i <= 5; i++) {
-        html += `<i class="bi bi-star-fill star ${i <= num ? "" : "muted"}"></i>`;
+// --- Modal ---
+function openModal(id) {
+    const room = habitaciones.find(r => r.id == id);
+    if (!room) return;
+
+    roomIdInput.value = room.id;
+    roomInfo.textContent = `Habitación ${room.numero} - ${room.tipo} ($${room.precio}/noche)`;
+
+    modal.classList.remove("hidden");
+    modal.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+}
+
+function closeModal() {
+    modal.classList.add("hidden");
+    modal.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+    form.reset();
+}
+
+overlay.addEventListener("click", closeModal);
+btnClose.addEventListener("click", closeModal);
+btnCancel.addEventListener("click", closeModal);
+document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && !modal.classList.contains("hidden")) closeModal();
+});
+
+// --- Confirmar reserva ---
+form.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const id = roomIdInput.value;
+    const entrada = checkin.value;
+    const salida = checkout.value;
+    const comentario = comentarios.value.trim();
+
+    if (!entrada || !salida) {
+        Swal.fire("Error", "Selecciona las fechas de entrada y salida", "error");
+        return;
     }
-    return html;
-}
 
-// Calcular promedio reseñas
-function promedioEstrellas(resenas) {
-    if (resenas.length === 0) return 0;
-    return Math.round(resenas.reduce((a, r) => a + r.estrellas, 0) / resenas.length);
-}
+    Swal.fire("Reserva confirmada",
+        `Has reservado la habitación ${id} del ${entrada} al ${salida}`,
+        "success"
+    );
 
-// Crear habitación
-function nuevaHabitacion() {
-    Swal.fire({
-        title: "Nueva Habitación",
-        html: `
-      <input id="nombre" class="swal2-input" placeholder="Nombre">
-      <input id="precio" type="number" class="swal2-input" placeholder="Precio">
-      <textarea id="desc" class="swal2-textarea" placeholder="Descripción"></textarea>
-    `,
-        confirmButtonText: "Guardar",
-        preConfirm: () => {
-            const nombre = document.getElementById("nombre").value;
-            const precio = document.getElementById("precio").value;
-            const desc = document.getElementById("desc").value;
-            if (!nombre || !precio || !desc) { Swal.showValidationMessage("Todos los campos son obligatorios"); return false; }
-            return { nombre, precio, desc };
-        }
-    }).then(r => {
-        if (r.isConfirmed) {
-            habitaciones.push({ id: Date.now(), nombre: r.value.nombre, precio: r.value.precio, desc: r.value.desc, reseñas: [] });
-            mostrarHabitaciones();
-            Swal.fire("Guardado", "Habitación creada correctamente", "success");
-        }
-    });
-}
+    closeModal();
+});
 
-// Editar
-function editarHabitacion(id) {
-    const hab = habitaciones.find(h => h.id === id);
-    Swal.fire({
-        title: "Editar Habitación",
-        html: `
-      <input id="nombre" class="swal2-input" value="${hab.nombre}">
-      <input id="precio" type="number" class="swal2-input" value="${hab.precio}">
-      <textarea id="desc" class="swal2-textarea">${hab.desc}</textarea>
-    `,
-        confirmButtonText: "Actualizar",
-        showCancelButton: true,
-        cancelButtonText: "Eliminar",
-        preConfirm: () => {
-            const nombre = document.getElementById("nombre").value;
-            const precio = document.getElementById("precio").value;
-            const desc = document.getElementById("desc").value;
-            if (!nombre || !precio || !desc) { Swal.showValidationMessage("Todos los campos son obligatorios"); return false; }
-            return { nombre, precio, desc };
-        }
-    }).then(r => {
-        if (r.isConfirmed) {
-            hab.nombre = r.value.nombre;
-            hab.precio = r.value.precio;
-            hab.desc = r.value.desc;
-            mostrarHabitaciones();
-            Swal.fire("Actualizado", "Habitación editada", "success");
-        } else if (r.dismiss === Swal.DismissReason.cancel) {
-            habitaciones = habitaciones.filter(h => h.id !== id);
-            mostrarHabitaciones();
-            Swal.fire("Eliminado", "Habitación eliminada", "success");
-        }
-    });
-}
-
-document.addEventListener("DOMContentLoaded", mostrarHabitaciones);
+// Inicializar
+renderHabitaciones();

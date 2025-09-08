@@ -2,56 +2,63 @@
 <html lang="es">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Eventos - Hotel Finder</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Eventos - Hotel App</title>
+
+    <!-- Iconos y fuentes -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/eventos.css">
 </head>
 
 <body>
-    <!-- Top bar -->
-    <div class="top-bar">
-        <div class="location">
-            <i class="bi bi-mic"></i>
-            <span>Eventos del Hotel</span>
+    <header class="app-header">
+        <a href="../home.html" class="back-btn"><i class="fas fa-chevron-left"></i></a>
+        <h2>Eventos</h2>
+    </header>
+
+    <main class="app-content">
+        <section>
+            <h3>Próximos eventos</h3>
+            <div id="events-container" class="events-list"></div>
+        </section>
+    </main>
+
+    <!-- Modal para registrarse en evento -->
+    <div id="event-modal" class="modal hidden" aria-hidden="true">
+        <div id="modal-overlay" class="modal-overlay" tabindex="-1"></div>
+
+        <div class="modal-content" role="dialog" aria-modal="true">
+            <button id="modal-close-btn" class="modal-close" aria-label="Cerrar modal"><i
+                    class="fas fa-times"></i></button>
+            <h3>Registrarse en Evento</h3>
+
+            <form id="event-form">
+                <input type="hidden" id="event-id">
+
+                <p id="event-info" style="font-weight:600; margin-bottom:.6rem;"></p>
+
+                <label for="participantes">Número de Participantes</label>
+                <input type="number" id="participantes" min="1" value="1" required>
+
+                <label for="comentarios-evento">Comentarios</label>
+                <textarea id="comentarios-evento" rows="2" placeholder="Ej: Preferencias especiales"></textarea>
+
+                <div class="modal-actions">
+                    <button type="button" id="cancel-btn" class="cancel-btn">Cancelar</button>
+                    <button type="submit" class="save-btn">Confirmar</button>
+                </div>
+            </form>
         </div>
     </div>
 
-    <!-- Lista de eventos -->
-    <section class="cards">
-        <div class="card">
-            <img src="https://picsum.photos/400/250?random=6" alt="Evento">
-            <div class="card-body">
-                <h3>Noche de Jazz</h3>
-                <p>Disfruta de una velada única en nuestro bar.</p>
-                <div class="card-footer">
-                    <span>$30</span>
-                    <button class="btn-book">Reservar</button>
-                </div>
-            </div>
-        </div>
+    <!-- SweetAlert y JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="js/eventos.js"></script>
 
-        <div class="card">
-            <img src="https://picsum.photos/400/250?random=7" alt="Evento">
-            <div class="card-body">
-                <h3>Conferencia Ejecutiva</h3>
-                <p>Salón de eventos principal - Capacidad 500 personas.</p>
-                <div class="card-footer">
-                    <span>$200</span>
-                    <button class="btn-book">Reservar</button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Navegación inferior -->
-    <nav class="nav-bottom">
-        <a href="index.html"><i class="bi bi-house-door"></i></a>
-        <a href="habitaciones.html"><i class="bi bi-door-closed"></i></a>
-        <a href="reservas.html"><i class="bi bi-calendar-check"></i></a>
-        <a href="eventos.html" class="active"><i class="bi bi-mic"></i></a>
-    </nav>
 </body>
 
 </html>

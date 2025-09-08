@@ -2,63 +2,66 @@
 <html lang="es">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Habitaciones - Hotel Finder</title>
-    <link rel="stylesheet" href="css/index.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Habitaciones - Hotel App</title>
+
+    <!-- Iconos y fuentes -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/habitaciones.css">
 </head>
 
 <body>
-    <header>
-        <h1>Hotel Finder - Habitaciones</h1>
+    <header class="app-header">
+        <a href="home.html" class="back-btn"><i class="fas fa-chevron-left"></i></a>
+        <h2>Habitaciones</h2>
     </header>
 
-    <main>
-        <button id="btnAddRoom" class="btn-primary"><i class="fas fa-plus"></i> Añadir Habitación</button>
-
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Nombre</th>
-                    <th>Tipo</th>
-                    <th>Precio</th>
-                    <th>Estado</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody id="habitacionesTable">
-                <!-- Aquí se cargan las habitaciones dinámicamente -->
-            </tbody>
-        </table>
+    <main class="app-content">
+        <section>
+            <h3>Explora nuestras habitaciones</h3>
+            <div id="rooms-container" class="rooms-list"></div>
+        </section>
     </main>
 
-    <!-- Modal para añadir/editar habitación -->
-    <div id="roomModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2 id="modalTitle">Añadir Habitación</h2>
-            <form id="roomForm">
-                <label>Nombre:</label>
-                <input type="text" id="roomName" required>
-                <label>Tipo:</label>
-                <input type="text" id="roomType" required>
-                <label>Precio:</label>
-                <input type="number" id="roomPrice" required min="0">
-                <label>Estado:</label>
-                <select id="roomStatus" required>
-                    <option value="Disponible">Disponible</option>
-                    <option value="Ocupada">Ocupada</option>
-                    <option value="Mantenimiento">Mantenimiento</option>
-                </select>
-                <button type="submit" class="btn-primary">Guardar</button>
+    <!-- Modal para reservar -->
+    <div id="reservation-modal" class="modal hidden" aria-hidden="true">
+        <div id="modal-overlay" class="modal-overlay" tabindex="-1"></div>
+
+        <div class="modal-content" role="dialog" aria-modal="true">
+            <button id="modal-close-btn" class="modal-close" aria-label="Cerrar modal"><i
+                    class="fas fa-times"></i></button>
+            <h3>Reservar Habitación</h3>
+
+            <form id="reservation-form">
+                <input type="hidden" id="room-id">
+
+                <p id="room-info" style="font-weight:600; margin-bottom:.6rem;"></p>
+
+                <label for="checkin">Fecha de Entrada</label>
+                <input type="date" id="checkin" required>
+
+                <label for="checkout">Fecha de Salida</label>
+                <input type="date" id="checkout" required>
+
+                <label for="comentarios">Comentarios</label>
+                <textarea id="comentarios" rows="2" placeholder="Ej: Necesito cama extra"></textarea>
+
+                <div class="modal-actions">
+                    <button type="button" id="cancel-btn" class="cancel-btn">Cancelar</button>
+                    <button type="submit" class="save-btn">Confirmar</button>
+                </div>
             </form>
         </div>
     </div>
 
-    <script src="js/habitaciones.js"></script>
+
 </body>
+<!-- SweetAlert y JS -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="js/habitaciones.js"></script>
 
 </html>

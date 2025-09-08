@@ -1,90 +1,80 @@
-// ========================
-// CRUD de eventos
-// ========================
+// ============================
+// Eventos JS - Gestión de eventos para huésped
+// ============================
 
-let eventos = [
-    { id: 1, nombre: "Noche de Jazz", desc: "Velada en el bar", precio: 30 },
-    { id: 2, nombre: "Conferencia Ejecutiva", desc: "Capacidad 500 personas", precio: 200 }
-];
+document.addEventListener("DOMContentLoaded", () => {
+    const eventsContainer = document.getElementById("events-container");
+    const eventModal = document.getElementById("event-modal");
+    const modalOverlay = document.getElementById("modal-overlay");
+    const modalCloseBtn = document.getElementById("modal-close-btn");
+    const cancelBtn = document.getElementById("cancel-btn");
+    const eventForm = document.getElementById("event-form");
+    const eventInfo = document.getElementById("event-info");
+    const eventIdInput = document.getElementById("event-id");
 
-function mostrarEventos() {
-    const cont = document.querySelector(".cards");
-    cont.innerHTML = "";
-    eventos.forEach(e => {
-        const card = document.createElement("div");
-        card.className = "card";
-        card.innerHTML = `
-      <img src="https://picsum.photos/400/250?random=${e.id + 50}" alt="Evento">
-      <div class="card-body">
-        <h3>${e.nombre}</h3>
-        <p>${e.desc}</p>
-        <div class="card-footer">
-          <span>$${e.precio}</span>
-          <button class="btn-book" onclick="editarEvento(${e.id})">Editar</button>
-        </div>
-      </div>
-    `;
-        cont.appendChild(card);
-    });
-}
+    // Simulación de datos de eventos (puedes reemplazar por API)
+    const events = [
+        { id: 1, nombre: "Cena de Gala", fecha: "2025-09-20", hora: "19:00" },
+        { id: 2, nombre: "Clases de Cocina", fecha: "2025-09-22", hora: "15:00" },
+        { id: 3, nombre: "Tour de Spa", fecha: "2025-09-25", hora: "10:00" },
+    ];
 
-function nuevoEvento() {
-    Swal.fire({
-        title: "Nuevo Evento",
-        html: `
-      <input id="nombre" class="swal2-input" placeholder="Nombre">
-      <textarea id="desc" class="swal2-textarea" placeholder="Descripción"></textarea>
-      <input id="precio" type="number" class="swal2-input" placeholder="Precio">
-    `,
-        confirmButtonText: "Guardar",
-        preConfirm: () => {
-            const nombre = document.getElementById("nombre").value;
-            const desc = document.getElementById("desc").value;
-            const precio = document.getElementById("precio").value;
-            if (!nombre || !desc || !precio) { Swal.showValidationMessage("Todos los campos son obligatorios"); return false; }
-            return { nombre, desc, precio };
-        }
-    }).then(r => {
-        if (r.isConfirmed) {
-            eventos.push({ id: Date.now(), ...r.value });
-            mostrarEventos();
-            Swal.fire("Guardado", "Evento creado", "success");
-        }
-    });
-}
+    // Función para renderizar eventos
+    function renderEvents() {
+        eventsContainer.innerHTML = "";
+        events.forEach(ev => {
+            const card = document.createElement("div");
+            card.classList.add("event-card");
+            card.innerHTML = `
+                <div>
+                    <h4>${ev.nombre}</h4>
+                    <p>${ev.fecha} - ${ev.hora}</p>
+                </div>
+                <button data-id="${ev.id}">Registrarse</button>
+            `;
+            eventsContainer.appendChild(card);
+        });
+    }
 
-function editarEvento(id) {
-    const ev = eventos.find(e => e.id === id);
-    Swal.fire({
-        title: "Editar Evento",
-        html: `
-      <input id="nombre" class="swal2-input" value="${ev.nombre}">
-      <textarea id="desc" class="swal2-textarea">${ev.desc}</textarea>
-      <input id="precio" type="number" class="swal2-input" value="${ev.precio}">
-    `,
-        confirmButtonText: "Actualizar",
-        showCancelButton: true,
-        cancelButtonText: "Eliminar",
-        preConfirm: () => {
-            const nombre = document.getElementById("nombre").value;
-            const desc = document.getElementById("desc").value;
-            const precio = document.getElementById("precio").value;
-            if (!nombre || !desc || !precio) { Swal.showValidationMessage("Todos los campos son obligatorios"); return false; }
-            return { nombre, desc, precio };
-        }
-    }).then(r => {
-        if (r.isConfirmed) {
-            ev.nombre = r.value.nombre;
-            ev.desc = r.value.desc;
-            ev.precio = r.value.precio;
-            mostrarEventos();
-            Swal.fire("Actualizado", "Evento modificado", "success");
-        } else if (r.dismiss === Swal.DismissReason.cancel) {
-            eventos = eventos.filter(e => e.id !== id);
-            mostrarEventos();
-            Swal.fire("Eliminado", "Evento eliminado", "success");
+    renderEvents();
+
+    // Abrir modal
+    eventsContainer.addEventListener("click", e => {
+        if (e.target.tagName === "BUTTON") {
+            const id = e.target.dataset.id;
+            const selectedEvent = events.find(ev => ev.id == id);
+
+            eventIdInput.value = selectedEvent.id;
+            eventInfo.textContent = `${selectedEvent.nombre} - ${selectedEvent.fecha} ${selectedEvent.hora}`;
+
+            eventModal.classList.remove("hidden");
+            eventModal.setAttribute("aria-hidden", "false");
         }
     });
-}
 
-document.addEventListener("DOMContentLoaded", mostrar)
+    // Cerrar modal
+    function closeModal() {
+        eventModal.classList.add("hidden");
+        eventModal.setAttribute("aria-hidden", "true");
+        eventForm.reset();
+    }
+
+    modalCloseBtn.addEventListener("click", closeModal);
+    modalOverlay.addEventListener("click", closeModal);
+    cancelBtn.addEventListener("click", closeModal);
+
+    // Enviar formulario
+    eventForm.addEventListener("submit", e => {
+        e.preventDefault();
+        const participantes = document.getElementById("participantes").value;
+        const comentarios = document.getElementById("comentarios-evento").value;
+
+        Swal.fire({
+            icon: "success",
+            title: "Registro confirmado",
+            text: `Te has registrado para el evento con ${participantes} participante(s).`
+        });
+
+        closeModal();
+    });
+});

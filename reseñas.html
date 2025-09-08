@@ -2,87 +2,63 @@
 <html lang="es">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Mis Reservas | Hotel App</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.0/dist/sweetalert2.min.css">
-    <link rel="stylesheet" href="css/reservas.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Reseñas - Hotel App</title>
+
+    <!-- Iconos y fuente -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <!-- CSS: asegurate que el archivo se llame css/resenas.css (sin ñ) -->
+    <link rel="stylesheet" href="css/reseñas.css">
 </head>
 
 <body>
-    <div class="app-container">
-        <header class="main-header">
-            <a href="home.html" class="back-btn"><i class="fas fa-chevron-left"></i></a>
-            <h3>Mis Reservas</h3>
-            <span></span>
-        </header>
+    <header class="app-header">
+        <h2>Reseñas de Habitaciones</h2>
+        <button id="new-review-btn" class="add-btn"><i class="fas fa-plus"></i> Nueva</button>
+    </header>
 
-        <div class="content">
-            <section class="reservations-section">
-                <h2>Próximas Reservas</h2>
-                <div class="reservations-list">
-                    <div class="reservation-card upcoming">
-                        <div class="card-header">
-                            <span class="room-name">Suite de Lujo</span>
-                            <span class="status-badge upcoming-badge">Confirmada</span>
-                        </div>
-                        <div class="card-details">
-                            <p>Entrada: <strong>15 de Octubre, 2025</strong></p>
-                            <p>Salida: <strong>20 de Octubre, 2025</strong></p>
-                            <p>Huéspedes: <strong>2 Adultos</strong></p>
-                            <p>Total: <strong>$1,750</strong></p>
-                        </div>
-                        <button class="cancel-btn" data-reservation-id="reserva1">Cancelar</button>
-                    </div>
+    <main class="app-content">
+        <section>
+            <h3>Últimas reseñas</h3>
+            <div id="reviews-container" class="reviews-list"></div>
+        </section>
+    </main>
 
-                    <div class="reservation-card upcoming">
-                        <div class="card-header">
-                            <span class="room-name">Habitación Doble</span>
-                            <span class="status-badge upcoming-badge">Pendiente</span>
-                        </div>
-                        <div class="card-details">
-                            <p>Entrada: <strong>2 de Noviembre, 2025</strong></p>
-                            <p>Salida: <strong>5 de Noviembre, 2025</strong></p>
-                            <p>Huéspedes: <strong>3 Adultos</strong></p>
-                            <p>Total: <strong>$540</strong></p>
-                        </div>
-                        <button class="cancel-btn" data-reservation-id="reserva2">Cancelar</button>
-                    </div>
+    <!-- Modal -->
+    <div id="review-modal" class="modal hidden" aria-hidden="true">
+        <div id="modal-overlay" class="modal-overlay" tabindex="-1"></div>
+
+        <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+            <button id="modal-close-btn" class="modal-close" aria-label="Cerrar modal"><i
+                    class="fas fa-times"></i></button>
+
+            <h3 id="modal-title">Nueva Reseña</h3>
+
+            <form id="review-form" autocomplete="off">
+                <label for="habitacion">Habitación</label>
+                <input id="habitacion" name="habitacion" type="text" placeholder="Ej: Suite de Lujo" required>
+
+                <label for="calificacion">Calificación</label>
+                <input id="calificacion" name="calificacion" type="number" min="1" max="5" placeholder="1 - 5" required>
+
+                <label for="comentario">Comentario</label>
+                <textarea id="comentario" name="comentario" rows="4" placeholder="Escribe tu experiencia..."
+                    required></textarea>
+
+                <div class="modal-actions">
+                    <button type="button" id="cancel-btn" class="cancel-btn">Cancelar</button>
+                    <button type="submit" class="save-btn">Guardar</button>
                 </div>
-            </section>
-
-            <section class="reservations-section">
-                <h2>Reservas Anteriores</h2>
-                <div class="reservations-list">
-                    <div class="reservation-card past">
-                        <div class="card-header">
-                            <span class="room-name">Habitación Sencilla</span>
-                            <span class="status-badge past-badge">Completada</span>
-                        </div>
-                        <div class="card-details">
-                            <p>Entrada: <strong>20 de Agosto, 2025</strong></p>
-                            <p>Salida: <strong>22 de Agosto, 2025</strong></p>
-                            <p>Huéspedes: <strong>1 Adulto</strong></p>
-                            <p>Total: <strong>$240</strong></p>
-                        </div>
-                    </div>
-                </div>
-            </section>
+            </form>
         </div>
-
-        <nav class="main-nav">
-            <a href="home.html" class="nav-item"><i class="fas fa-home"></i> Inicio</a>
-            <a href="habitaciones.html" class="nav-item"><i class="fas fa-search"></i> Explorar</a>
-            <a href="reservas.html" class="nav-item active"><i class="fas fa-list-alt"></i> Reservas</a>
-            <a href="#" class="nav-item"><i class="fas fa-user-circle"></i> Perfil</a>
-        </nav>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.0/dist/sweetalert2.all.min.js"></script>
-    <script src="js/reservas.js"></script>
+    <!-- SweetAlert2 y JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="js/reseñas.js"></script>
 </body>
 
 </html>
