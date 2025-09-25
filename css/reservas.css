@@ -18,20 +18,52 @@
     -webkit-tap-highlight-color: transparent;
 }
 
-html,
-body {
-    height: 100%;
-    overflow: hidden;
-    background-color: var(--light-bg);
-}
 
 .app-container {
     position: relative;
     width: 100%;
     height: 100vh;
-    overflow: hidden;
     background-color: white;
     box-shadow: 0 0 20px var(--shadow-light);
+}
+
+.modal-content input{
+    width: 100%;
+    margin-top: .3rem;
+    padding: .55rem;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    font-size: .9rem;
+}
+
+.modal-content input:focus{
+    border-color: var(--verde);
+    box-shadow: 0 0 0 2px rgba(43, 85, 80, 0.2)
+}
+
+.save-btn {
+    background: #198754;
+    border: none;
+    padding: .6rem .9rem;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600
+}
+
+.modal-actions {
+    display: flex;
+    gap: .6rem;
+    margin-top: 1rem;
+    justify-content: flex-end
+}
+
+.cancel-btn {
+    background: #ccc;
+    border: none;
+    padding: .6rem .9rem;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600
 }
 
 .main-header {
@@ -64,12 +96,6 @@ body {
     font-size: 1.2rem;
     cursor: pointer;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.content {
-    padding: 0 20px;
-    overflow-y: auto;
-    height: calc(100vh - 120px);
 }
 
 .main-nav {
@@ -124,6 +150,14 @@ body {
     gap: 15px;
 }
 
+.table-responsive{
+    max-width: 100%;
+}
+
+.table-container{
+    max-height: 400px;
+    overflow-y: auto;
+}
 .reservation-card {
     background-color: #fff;
     padding: 20px;
@@ -173,24 +207,13 @@ body {
 
 .card-details p {
     font-size: 0.95rem;
-    color: #666;
+    color: #777;
     margin-bottom: 8px;
 }
 
 .card-details strong {
     font-weight: 600;
     color: var(--primary-color);
-}
-
-.edit-btn {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    background: none;
-    border: none;
-    font-size: 1.3rem;
-    color: var(--accent-color);
-    cursor: pointer;
 }
 
 /* Estilos de los modales */
@@ -291,19 +314,78 @@ body {
     margin-top: 10px;
 }
 
-.delete-btn {
-    width: 100%;
-    padding: 15px;
-    border: none;
-    border-radius: 10px;
-    background-color: var(--delete-color);
-    color: white;
-    font-size: 1.1rem;
-    font-weight: 600;
-    cursor: pointer;
-    margin-top: 10px;
-}
 
 .hidden {
     display: none;
 }
+
+select.custom-select {
+    appearance: none; /* Oculta la flechita nativa */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 10px 40px 10px 12px;
+    font-size: 16px;
+    font-family: inherit;
+    border-radius: 5px;
+    width: 100%;
+    box-sizing: border-box;
+    transition: border 0.2s ease;
+
+    background-image: url("data:image/svg+xml;utf8,<svg fill='gray' height='20' viewBox='0 0 24 24' width='20' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 16px;
+}
+
+select.custom-select:focus {
+border-color: #007bff;
+outline: none;
+}
+/* Forzar visibilidad de la paginación */
+#paginacion {
+    padding: 10px;
+    margin-top: 20px;
+    list-style: none;
+    padding-bottom: 100px;
+}
+
+/* Asegura que los botones se vean */
+#paginacion .page-item {
+    display: inline-block;
+    margin: 0 5px;
+}
+
+#paginacion .page-link {
+    color: var(--primary-color);
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    padding: 8px 12px;
+    text-decoration: none;
+    background-color: white;
+    transition: all 0.2s ease-in-out;
+}
+
+/* Hover */
+#paginacion .page-link:hover {
+    background-color: var(--accent-color);
+    color: white;
+    border-color: var(--accent-color);
+}
+
+/* Active page */
+#paginacion .page-item.active .page-link {
+    background-color: var(--accent-color);
+    color: white;
+    border-color: var(--accent-color);
+}
+
+/* Disabled */
+#paginacion .page-item.disabled .page-link {
+    color: #ccc;
+    pointer-events: none;
+    border-color: #eee;
+}
+
