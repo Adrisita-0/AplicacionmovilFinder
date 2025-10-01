@@ -1,0 +1,351 @@
+/* 1. MAQUETACIÓN DE PANTALLA DIVIDIDA */
+
+
+
+
+
+.login-body {
+
+    margin: 0;
+
+    padding: 0;
+
+    font-family: Arial, sans-serif;
+
+    background-color: #f2f7f7;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    min-height: 100vh;
+
+}
+
+
+
+.split-screen-container {
+
+    display: flex;
+
+    width: 80%;
+
+    max-width: 1200px;
+
+    height: 90vh;
+
+    background-color: white;
+
+    border-radius: 15px;
+
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+
+    overflow: hidden;
+
+}
+
+
+
+/* Panel Izquierdo: Formulario */
+
+.form-panel {
+
+    flex: 1;
+
+    background-color: #e4ecec;
+
+    padding: 30px 40px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+}
+
+
+
+.login-container {
+
+    width: 100%;
+
+}
+
+
+
+.login-card {
+
+    max-width: 380px;
+
+    margin: 0 auto;
+
+    width: 100%;
+
+}
+
+
+
+/* Panel Derecho: Ilustración */
+
+.illustration-panel {
+
+    flex: 1;
+
+    background-color: #f7f9f9;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+}
+
+
+
+.illustration-panel img {
+
+    max-width: 90%;
+
+    max-height: 90%;
+
+    object-fit: contain;
+
+}
+
+
+
+/* 2. ENCABEZADO Y TÍTULOS */
+
+
+
+
+
+.login-header {
+
+    text-align: center;
+
+    margin-bottom: 40px;
+
+}
+
+
+
+.logo {
+
+    max-width: 100px;
+
+    margin-bottom: 15px;
+
+}
+
+
+
+.welcome-heading {
+
+    font-size: 2.2em;
+
+    font-weight: bold;
+
+    color: #333333;
+
+    margin-bottom: 5px;
+
+}
+
+
+
+.welcome-subtitle {
+
+    font-size: 1em;
+
+    color: #666;
+
+    margin-bottom: 30px;
+
+}
+
+
+
+/* 3. ESTILO DE LÍNEA DE FONDO (Minimalista) */
+
+
+
+
+
+.form-group {
+
+    margin-bottom: 40px;
+
+}
+
+
+
+/* Etiquetas */
+
+.form-group label {
+
+    display: block;
+
+    font-size: 1.1em;
+
+    font-weight: normal;
+
+    color: #333333;
+
+    margin-bottom: 5px;
+
+    letter-spacing: 1px;
+
+}
+
+
+
+.form-group input {
+
+    width: 100%;
+
+    padding: 5px 0;
+
+    border: none;
+
+    border-bottom: 2px solid #74a9a4;
+
+    background-color: transparent;
+
+    box-sizing: border-box;
+
+    font-size: 1.2em;
+
+    color: #333333;
+
+    outline: none;
+
+    box-shadow: none;
+
+}
+
+
+
+/* 4. BOTONES Y ENLACES */
+
+
+
+.btn-primary {
+
+    width: 100%;
+
+    padding: 15px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background-color: #74a9a4; /* Color Primario */
+
+    color: white;
+
+    font-size: 1.1em;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: background-color 0.3s;
+
+    margin-top: 15px;
+
+    margin-bottom: 25px;
+
+}
+
+
+
+.btn-primary:hover {
+
+    background-color: #598581; /* Color derivado más oscuro */
+
+}
+
+
+
+.signup-link {
+
+    text-align: center;
+
+    font-size: 0.95em;
+
+}
+
+
+
+.signup-link p a {
+
+    color: #74a9a4; /* Color primario */
+
+    text-decoration: none;
+
+    font-weight: bold;
+
+}
+
+
+
+.message {
+
+    text-align: center;
+
+    margin-top: 15px;
+
+    font-weight: 600;
+
+}
+
+
+
+/* 5. RESPONSIVE PARA MÓVILES */
+
+@media (max-width: 900px) {
+
+    .split-screen-container {
+
+        flex-direction: column;
+
+        height: auto;
+
+        width: 100%;
+
+        border-radius: 0;
+
+    }
+
+
+
+    .illustration-panel {
+
+        display: none;
+
+    }
+
+
+
+    .form-panel {
+
+        flex: none;
+
+        padding: 30px 20px;
+
+    }
+
+
+
+    .login-card {
+
+        max-width: 100%;
+
+    }
+
+}

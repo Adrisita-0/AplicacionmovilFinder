@@ -23,7 +23,9 @@
     <main class="app-content">
         <section>
             <h3>Explora nuestras habitaciones</h3>
-            <div id="rooms-container" class="rooms-list"></div>
+            <div id="rooms-container" class="rooms-list">
+                <h3>Cargando...</h3>
+            </div>
         </section>
     </main>
 
@@ -41,6 +43,29 @@
 
                 <p id="room-info" style="font-weight:600; margin-bottom:.6rem;"></p>
 
+                <input type="hidden" id="idReserva">
+
+                <label for="cliente">Cliente</label>
+                <select class="custom-select" id="idCliente" required>
+                    <option value="" disabled selected>Seleccione...</option>
+                </select>
+
+                <label for="estadoReserva">Estado de la reserva</label>
+                <select class="custom-select" id="idEstadoReserva" required>
+                    <option value="" disabled selected>Seleccione...</option>
+                </select>
+
+                <label for="metodoPago">Metodo de pago para la reserva</label>
+                <select class="custom-select" id="idMetodoPago" required>
+                    <option value="" disabled selected>Seleccione...</option>
+                </select>
+
+                <label for="fechaReserva">Fecha de la reserva</label>
+                <input type="date" id="fechaReserva" required>
+
+                <label for="precioTotalReserva">Precio Total</label>
+                <input type="number" id="precioTotalReserva" disabled required>
+                <!--
                 <label for="checkin">Fecha de Entrada</label>
                 <input type="date" id="checkin" required>
 
@@ -49,7 +74,7 @@
 
                 <label for="comentarios">Comentarios</label>
                 <textarea id="comentarios" rows="2" placeholder="Ej: Necesito cama extra"></textarea>
-
+                -->
                 <div class="modal-actions">
                     <button type="button" id="cancel-btn" class="cancel-btn">Cancelar</button>
                     <button type="submit" class="save-btn">Confirmar</button>
@@ -62,6 +87,6 @@
 </body>
 <!-- SweetAlert y JS -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="js/habitaciones.js"></script>
+<script type="module" src="js/controllers/habitacionesController.js"></script>
 
 </html>

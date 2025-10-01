@@ -1,0 +1,507 @@
+/* 1.PANTALLA DIVIDIDA */
+
+
+
+body {
+
+    margin: 0;
+
+    padding: 0;
+
+    font-family: Arial, sans-serif;
+
+    background-color: #f2f7f7;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    min-height: 100vh;
+
+}
+
+
+
+.split-screen-container {
+
+    display: flex;
+
+    width: 80%;
+
+    max-width: 1200px;
+
+    height: 90vh;
+
+    background-color: white;
+
+    border-radius: 15px;
+
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+
+    overflow: hidden;
+
+}
+
+
+
+/* Panel Izquierdo: Formulario */
+
+.login-panel {
+
+    flex: 1;
+
+    background-color: #e4ecec;
+
+    padding: 30px 40px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: flex-start;
+
+}
+
+
+
+.login-box {
+
+    max-width: 380px;
+
+    margin: 0 auto;
+
+    width: 100%;
+
+    padding: 20px 0;
+
+    box-sizing: border-box;
+
+    flex-grow: 1;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+}
+
+
+
+/* Panel Derecho: Ilustración (Mantenemos el fondo blanco/claro) */
+
+.illustration-panel {
+
+    flex: 1;
+
+    background-color: #f7f9f9;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+}
+
+
+
+.illustration-panel img {
+
+    max-width: 90%;
+
+    max-height: 90%;
+
+    object-fit: contain;
+
+}
+
+
+
+/* 2. BARRA SUPERIOR (BrandLogo y Nav) */
+
+
+
+.logo {
+
+    text-align: left;
+
+    margin-bottom: 20px;
+
+}
+
+
+
+.logo img {
+
+    max-width: 120px;
+
+}
+
+
+
+.top-bar {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    width: 100%;
+
+    margin-bottom: 40px;
+
+    padding: 0;
+
+}
+
+
+
+.brand-logo {
+
+    font-weight: bold;
+
+    font-size: 1.2em;
+
+    color: #333;
+
+}
+
+
+
+.main-nav a {
+
+    text-decoration: none;
+
+    color: #666;
+
+    margin-left: 25px;
+
+    font-size: 0.9em;
+
+    transition: color 0.2s;
+
+}
+
+
+
+.main-nav a:hover {
+
+    color: #74a9a4; /* Hover con color primario */
+
+}
+
+
+
+/* 3. TÍTULOS Y TEXTO DE FORMULARIO */
+
+
+
+.welcome-heading {
+
+    font-size: 2.8em;
+
+    font-weight: bold;
+
+    color: #333333;
+
+    margin-bottom: 50px;
+
+    letter-spacing: 1px;
+
+}
+
+
+
+.welcome-subtitle {
+
+    /* El diseño minimalista no tiene este subtítulo tan grande, lo ocultamos o estilamos discretamente */
+
+    display: none;
+
+}
+
+
+
+/* =================================== */
+
+/* 4. ESTILO DE LÍNEA DE FONDO (Minimalista) */
+
+/* =================================== */
+
+
+
+.form-group {
+
+    margin-bottom: 35px;
+
+}
+
+
+
+/* Etiquetas: "Username" y "Password" */
+
+.form-group label {
+
+    display: block;
+
+    font-size: 1.1em;
+
+    font-weight: normal;
+
+    color: #333333; /* Texto oscuro */
+
+    margin-bottom: 5px;
+
+    letter-spacing: 1px;
+
+}
+
+
+
+/* Campos de Entrada: Solo la línea de fondo */
+
+.form-group input {
+
+    width: 100%;
+
+    padding: 5px 0;
+
+    border: none;
+
+    border-bottom: 2px solid #74a9a4; /* Línea de fondo con color primario */
+
+    background-color: transparent;
+
+    box-sizing: border-box;
+
+    font-size: 1.3em;
+
+    color: #333333;
+
+    outline: none;
+
+    box-shadow: none;
+
+}
+
+
+
+/* Para simular el texto de ejemplo 'xxxxxxxxxxx' y los puntos de la contraseña */
+
+#email::placeholder,
+
+#password::placeholder {
+
+    color: #555555;
+
+    opacity: 0.8;
+
+    letter-spacing: 2px;
+
+}
+
+
+
+#password {
+
+    letter-spacing: 2px;
+
+}
+
+
+
+/* =================================== */
+
+/* 5. OPCIONES Y BOTONES */
+
+/* =================================== */
+
+
+
+.options-row {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-top: 20px;
+
+    margin-bottom: 40px;
+
+    font-size: 1em;
+
+    color: #333333;
+
+}
+
+
+
+.remember-me label {
+
+    font-weight: normal;
+
+    color: #333333;
+
+}
+
+
+
+.forgot-password {
+
+    color: #74a9a4; /* Color primario */
+
+    font-weight: 600;
+
+    text-decoration: none;
+
+}
+
+
+
+/* Botón SUBMIT */
+
+.btn-primary {
+
+    width: 100%;
+
+    padding: 15px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background-color: #74a9a4; /* Color Primario */
+
+    color: white;
+
+    font-size: 1.2em;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: background-color 0.3s;
+
+    /* Estilo hover con color derivado más oscuro */
+
+}
+
+
+
+.btn-primary:hover {
+
+    background-color: #598581;
+
+}
+
+
+
+/* Estilos de botones secundarios (Google, Divisor) */
+
+
+
+.divider {
+
+    color: #888;
+
+}
+
+.divider::before, .divider::after {
+
+    background: #ccc;
+
+}
+
+
+
+.btn-google {
+
+    /* Mantenemos blanco para que no interfiera con el diseño minimalista */
+
+    border: 1px solid #ccc;
+
+    background-color: white;
+
+    color: #333;
+
+}
+
+
+
+.signup-link {
+
+    text-align: center;
+
+    margin-top: 20px;
+
+    font-size: 0.9em;
+
+}
+
+
+
+.signup-link a {
+
+    color: #74a9a4; /* Color primario */
+
+    text-decoration: none;
+
+    font-weight: bold;
+
+}
+
+
+
+/* =================================== */
+
+/* 6. RESPONSIVIDAD PARA MÓVILES */
+
+/* =================================== */
+
+@media (max-width: 900px) {
+
+    .split-screen-container {
+
+        flex-direction: column;
+
+        height: auto;
+
+        width: 100%;
+
+        border-radius: 0;
+
+    }
+
+
+
+    .illustration-panel {
+
+        display: none;
+
+    }
+
+
+
+    .login-panel {
+
+        flex: none;
+
+        padding: 30px 20px;
+
+    }
+
+
+
+    .login-box {
+
+        max-width: 100%;
+
+    }
+
+}

@@ -38,15 +38,29 @@
             <h3 id="modal-title">Nueva Reseña</h3>
 
             <form id="review-form" autocomplete="off">
+
+                <input type="hidden" id="idReseña">
+
+                <label for="cliente">Cliente</label>
+                <select class="custom-select" id="idCliente" required>
+                    <option value="" hidden disabled selected>Seleccione...</option>
+                </select>
+
+                <label for="hotel">Hotel</label>
+                <select class="custom-select" id="idHotel" required>
+                    <option value="" hidden disabled selected>Seleccione...</option>
+                </select>
+
+                <!--
                 <label for="habitacion">Habitación</label>
                 <input id="habitacion" name="habitacion" type="text" placeholder="Ej: Suite de Lujo" required>
-
-                <label for="calificacion">Calificación</label>
-                <input id="calificacion" name="calificacion" type="number" min="1" max="5" placeholder="1 - 5" required>
-
+                -->
                 <label for="comentario">Comentario</label>
                 <textarea id="comentario" name="comentario" rows="4" placeholder="Escribe tu experiencia..."
                     required></textarea>
+
+                <label for="calificacion">Calificación</label>
+                <input id="calificacion" name="calificacion" type="number" min="0" max="5" placeholder="1 - 5" required>
 
                 <div class="modal-actions">
                     <button type="button" id="cancel-btn" class="cancel-btn">Cancelar</button>
@@ -58,7 +72,7 @@
 
     <!-- SweetAlert2 y JS -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="js/reseñas.js"></script>
+    <script type="module" src="js/controllers/reseñasController.js"></script>
 </body>
 
 </html>
