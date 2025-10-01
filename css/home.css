@@ -106,8 +106,8 @@ body {
 
 .sections-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 15px;
     padding: 20px;
 }
 
@@ -117,7 +117,7 @@ body {
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding: 25px 15px;
+    padding: 20px 15px;
     background-color: #fff;
     border-radius: 12px;
     box-shadow: 0 5px 15px var(--shadow-light);

@@ -1,130 +1,138 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    // modal funciones 
+    // =========================
+    // Selección de elementos
+    // =========================
+    const roomItems = document.querySelectorAll('.trending-item');
+    const roomDetailsModal = document.getElementById('room-details-modal');
+    const reservationModal = document.getElementById('reservation-modal');
+    const roomDetailsModalCloseBtn = roomDetailsModal ? roomDetailsModal.querySelector('.modal-close-btn') : null;
+    const reservationModalCloseBtn = reservationModal ? reservationModal.querySelector('.modal-close-btn') : null;
+    const reserveBtn = document.getElementById('modal-reserve-btn');
+    const searchInput = document.getElementById("search-input");
+    const notificationBtn = document.getElementById("notification-btn");
+
+    // =========================
+    // Funciones para modales
+    // =========================
     function openModal(modalId) {
         const modal = document.getElementById(modalId);
-        if (modal) {
-            modal.classList.remove('hidden');
-        }
+        if (modal) modal.classList.remove('hidden');
     }
-
     function closeModal(modalId) {
         const modal = document.getElementById(modalId);
-        if (modal) {
-            modal.classList.add('hidden');
-        }
+        if (modal) modal.classList.add('hidden');
     }
 
-    // --- Lógica Principal ---
-    //aqui se seleccionan las tarjetas de las habitaciones con la clase y se guardan en una lista
-    const roomItems = document.querySelectorAll('.trending-item');
+    // =========================
+    // Búsqueda en tiempo real
+    // =========================
+    if (searchInput) {
+        searchInput.addEventListener("input", function () {
+            const query = this.value.toLowerCase();
+            roomItems.forEach(item => {
+                const roomNameEl = item.querySelector("h4");
+                if (!roomNameEl) return;
+                const roomName = roomNameEl.textContent.toLowerCase();
+                item.style.display = roomName.includes(query) ? "block" : "none";
+            });
+        });
+    }
 
-    // se selecciona el modal de detalles de la habitación por su ID.
-    const roomDetailsModal = document.getElementById('room-details-modal');
-
-    //  aqui tambien se selcciona el modal  solo que aquie es de reserva por su ID.
-    const reservationModal = document.getElementById('reservation-modal');
-
-    // Selecciona el botón para cerrar el modal de detalles.
-    // La parte `roomDetailsModal ? ... : null` es una validación para asegurar que el modal existe antes de buscar el botón dentro de él.
-    const roomDetailsModalCloseBtn = roomDetailsModal ? roomDetailsModal.querySelector('.modal-close-btn') : null;
-
-    // Selecciona el botón para cerrar el modal de reserva, usando la misma validación que la línea anterior.
-    const reservationModalCloseBtn = reservationModal ? reservationModal.querySelector('.modal-close-btn') : null;
-
-    // Selecciona el botón de "Reservar ahora" que se encuentra dentro del modal de detalles.
-    const reserveBtn = document.getElementById('modal-reserve-btn');
-
-
-    //aqui se manejan los clicks en las tarjetas para las habitaciones para poder abrirlas en el modal 
-    roomItems.forEach(item => {
-        item.addEventListener('click', (e) => {
+    // =========================
+    // Notificaciones
+    // =========================
+    if (notificationBtn) {
+        notificationBtn.addEventListener("click", function (e) {
             e.preventDefault();
+            Swal.fire({
+                title: '¡Tienes nuevas notificaciones!',
+                html: `
+                    <ul style="text-align:left; padding-left:20px">
+                        <li>Tu reserva fue confirmada ✅</li>
+                        <li>Oferta especial en Suite de Lujo 💰</li>
+                        <li>Nuevo comentario en tus reseñas 📝</li>
+                    </ul>
+                `,
+                icon: 'info',
+                confirmButtonText: 'Cerrar'
+            });
+        });
+    }
 
+    // =========================
+    // Abrir modal de habitación
+    // =========================
+    if (roomItems && roomItems.length && roomDetailsModal) {
+        roomItems.forEach(item => {
+            item.addEventListener('click', (e) => {
+                e.preventDefault();
+                const roomNameEl = item.querySelector('h4');
+                const roomPriceEl = item.querySelector('.trending-price');
+                if (!roomNameEl || !roomPriceEl) return;
 
+                const roomName = roomNameEl.textContent;
+                const roomPrice = roomPriceEl.textContent;
 
-            const roomName = item.querySelector('h4').textContent;
-            const roomPrice = item.querySelector('.trending-price').textContent;
-
-            if (roomDetailsModal) {
-
-                //actualizamos el contenido del modal con datos que estan en la tarjeta 
                 document.getElementById('modal-room-name').textContent = roomName;
                 document.getElementById('modal-price').textContent = roomPrice;
-                document.getElementById('reservation-room-name').textContent = `Reservando: ${roomName}`;
+
+                const reservationNameEl = document.getElementById('reservation-room-name');
+                if (reservationNameEl) reservationNameEl.textContent = `Reservando: ${roomName}`;
 
                 openModal('room-details-modal');
-            }
+            });
         });
-    });
+    }
 
-
-    //aqui puse el boton de reservar pero con el modal de los detalles
+    // =========================
+    // Botón "Reservar ahora"
+    // =========================
     if (reserveBtn) {
         reserveBtn.addEventListener('click', () => {
-            if (roomDetailsModal) {
-                closeModal('room-details-modal');
-            }
-            if (reservationModal) {
-                openModal('reservation-modal');
-            }
+            if (roomDetailsModal) closeModal('room-details-modal');
+            if (reservationModal) openModal('reservation-modal');
         });
     }
 
+    // =========================
+    // Confirmar reserva
+    // =========================
+    const confirmBtn = document.getElementById('confirm-reservation-btn');
+    if (confirmBtn) {
+        confirmBtn.addEventListener('click', () => {
+            const checkInDate = document.getElementById('check-in-date').value;
+            const checkOutDate = document.getElementById('check-out-date').value;
+            const today = new Date().toISOString().split('T')[0];
 
-    //aqui esta el boton de reserva 
-    document.getElementById('confirm-reservation-btn').addEventListener('click', () => {
-        const checkInDate = document.getElementById('check-in-date').value;
-        const checkOutDate = document.getElementById('check-out-date').value;
-        const today = new Date().toISOString().split('T')[0];
+            if (!checkInDate || !checkOutDate) {
+                Swal.fire({ icon: 'error', title: 'Error de validación', text: 'Por favor, selecciona una fecha de entrada y salida.' });
+                return;
+            }
+            if (checkInDate < today) {
+                Swal.fire({ icon: 'error', title: 'Fecha inválida', text: 'La fecha de entrada no puede ser en el pasado.' });
+                return;
+            }
+            if (checkOutDate <= checkInDate) {
+                Swal.fire({ icon: 'error', title: 'Fechas incorrectas', text: 'La fecha de salida debe ser posterior a la fecha de entrada.' });
+                return;
+            }
 
-        // se validan las fechas 
-        if (!checkInDate || !checkOutDate) {
+            const roomName = document.getElementById('reservation-room-name').textContent;
             Swal.fire({
-                icon: 'error',
-                title: 'Error de validación',
-                text: 'Por favor, selecciona una fecha de entrada y salida.'
-            });
-            return;
-        }
-
-        if (checkInDate < today) {
-            Swal.fire({
-                icon: 'error',
-                title: 'Fecha inválida',
-                text: 'La fecha de entrada no puede ser en el pasado.'
-            });
-            return;
-        }
-
-        if (checkOutDate <= checkInDate) {
-            Swal.fire({
-                icon: 'error',
-                title: 'Fechas incorrectas',
-                text: 'La fecha de salida debe ser posterior a la fecha de entrada.'
-            });
-            return;
-        }
-
-
-        //cuando las fechas sean validas, mostrara la alerta de que si esta bien 
-        const roomName = document.getElementById('reservation-room-name').textContent;
-        Swal.fire({
-            title: '¡Reserva Confirmada!',
-            text: `${roomName.replace('Reservando: ', '')} ha sido reservada con éxito.`,
-            icon: 'success',
-            confirmButtonText: 'OK',
-            allowOutsideClick: false
-        }).then(() => {
-            closeModal('reservation-modal');
+                title: '¡Reserva Confirmada!',
+                text: `${roomName.replace('Reservando: ', '')} ha sido reservada con éxito.`,
+                icon: 'success',
+                confirmButtonText: 'OK',
+                allowOutsideClick: false
+            }).then(() => closeModal('reservation-modal'));
         });
-    });
+    }
 
-    // aqui esta la funcion del  modal 
-    if (roomDetailsModalCloseBtn) {
-        roomDetailsModalCloseBtn.addEventListener('click', () => closeModal('room-details-modal'));
-    }
-    if (reservationModalCloseBtn) {
-        reservationModalCloseBtn.addEventListener('click', () => closeModal('reservation-modal'));
-    }
+    // =========================
+    // Botones de cerrar modales
+    // =========================
+    if (roomDetailsModalCloseBtn) roomDetailsModalCloseBtn.addEventListener('click', () => closeModal('room-details-modal'));
+    if (reservationModalCloseBtn) reservationModalCloseBtn.addEventListener('click', () => closeModal('reservation-modal'));
+
 });
