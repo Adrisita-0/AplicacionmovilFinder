@@ -1,0 +1,329 @@
+/* Variables de color de la nueva paleta */
+:root {
+    --primary-color: #2c3e50;    /* Azul medianoche (Botones, encabezados) */
+    --accent-color: #2b5550;     /* Turquesa/Verde musgo (Activos, acentos) */
+    --light-bg: #f5f7fa;         /* Fondo de la app (gris muy claro) */
+    --card-bg: #ffffff;          /* Fondo de tarjeta blanco */
+    --text-color: #333;          /* Texto principal oscuro */
+    --text-light: #6c757d;       /* Texto secundario gris */
+    --border-color: #e0e0e0;     /* Color de borde */
+    --shadow-light: rgba(0, 0, 0, 0.1); /* Sombra ligera */
+    --error-color: #cc0000;      /* Rojo para cerrar sesión */
+}
+
+/* Estilos Globales y Reset Básico */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif; 
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    background-color: var(--light-bg);
+    /* El cuerpo no debe tener padding inferior aquí, se gestiona en .app-container */
+}
+
+/* --- Contenedor Principal (Vista Móvil por Defecto) --- */
+.app-container {
+    position: relative;
+    width: 100%;
+    max-width: 450px;
+    margin: 0 auto; /* Centra el contenedor en pantallas grandes */
+    min-height: 100vh;
+    background-color: var(--card-bg);
+    box-shadow: 0 0 20px var(--shadow-light);
+    padding-bottom: 70px; /* Espacio para el nav fijo */
+}
+
+/* --- Encabezado Superior (Header) --- */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+}
+
+.greeting {
+    display: flex;
+    align-items: center; 
+    gap: 10px;
+}
+
+.user-icon { 
+    font-size: 40px;
+    color: var(--accent-color);
+}
+
+.greeting div p { 
+    font-size: 0.85rem;
+    color: var(--text-light);
+    margin-bottom: -3px;
+}
+
+.greeting div h1 { 
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+.notification-bell {
+    font-size: 24px;
+    color: var(--text-light);
+}
+
+/* --- Tarjeta de Perfil Principal --- */
+.profile-card {
+    background-color: var(--card-bg);
+    border-radius: 15px;
+    padding: 30px 20px;
+    text-align: center;
+    box-shadow: 0 5px 15px var(--shadow-light); 
+    margin: 0 20px 20px 20px; 
+}
+
+/* Foto de Perfil Clickable */
+.profile-picture-container {
+    margin-bottom: 20px;
+}
+
+.profile-picture {
+    width: 100px;
+    height: 100px;
+    background-color: #e0f2f1;
+    border-radius: 50%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s;
+}
+
+.profile-picture:hover {
+    transform: scale(1.05);
+}
+
+.photo-icon {
+    font-size: 60px;
+    color: var(--accent-color);
+}
+
+.profile-picture.has-photo {
+    background-color: transparent; 
+    background-size: cover;
+    background-position: center;
+}
+
+.user-name {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: var(--text-color);
+}
+
+.user-location {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    margin-bottom: 30px;
+}
+
+/* --- Formulario de Edición --- */
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 15px;
+    text-align: left;
+    margin-bottom: 30px;
+}
+
+.form-grid label {
+    font-weight: 500;
+    color: var(--text-color);
+    align-self: center;
+    font-size: 0.95rem;
+}
+
+.form-grid input,
+.form-grid select {
+    padding: 10px 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 0.95rem;
+    color: var(--text-color);
+    background-color: var(--light-bg);
+    appearance: none;
+}
+
+.form-grid input:focus,
+.form-grid select:focus {
+    border-color: var(--accent-color);
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(43, 85, 80, 0.2);
+}
+
+.form-grid select {
+    /* Icono SVG para el select */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%236c757d' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 18px;
+}
+
+/* Botón de Guardar */
+.save-button {
+    width: 100%;
+    padding: 12px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.save-button:hover {
+    background-color: #1f3040; 
+    transform: translateY(-1px);
+}
+
+/* --- Separador y Cerrar Sesión --- */
+.separator {
+    height: 1px;
+    background-color: var(--border-color);
+    margin: 30px 20px 20px 20px;
+}
+
+.logout-section {
+    padding: 10px 20px;
+}
+
+/* Botón de Cerrar Sesión en Rojo */
+.logout-button {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: none;
+    border: none;
+    color: var(--error-color); 
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    padding: 10px 0;
+    width: 100%;
+    text-align: left;
+    transition: color 0.2s;
+}
+
+.logout-button .material-symbols-outlined {
+    font-size: 24px;
+    color: var(--error-color); 
+}
+
+.logout-button:hover {
+    color: #ff3333; 
+}
+
+.logout-button:hover .material-symbols-outlined {
+    color: #ff3333;
+}
+
+/* --- Barra de Navegación Inferior (.main-nav con Font Awesome) --- */
+.main-nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 15px; 
+    background-color: white;
+    border-top: 1px solid var(--border-color);
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    max-width: 450px; 
+    box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.03);
+    z-index: 1000;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: #888;
+    font-size: 0.8rem; 
+    gap: 5px;
+    transition: color 0.3s ease;
+}
+
+.nav-item i {
+    font-size: 1.3rem;
+}
+
+.nav-item span {
+    font-size: 0.7rem; 
+    font-weight: 500;
+}
+
+.nav-item.active {
+    color: var(--accent-color);
+    font-weight: 600;
+}
+
+/* ======================================= */
+/* ====== MEDIA QUERIES PARA RESPONSIVE ====== */
+/* ======================================= */
+
+/* 1. Reset para pantallas más grandes que 450px (simulación de app web en escritorio) */
+@media (min-width: 451px) {
+    /* Fondo del cuerpo solo visible fuera del contenedor principal */
+    body {
+        background-color: var(--light-bg);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+    }
+
+    /* Ajuste de altura para que el contenedor principal quepa en el viewport */
+    .app-container {
+        height: 100vh;
+        box-shadow: 0 0 20px var(--shadow-light); /* Asegura que la sombra se vea */
+        border-radius: 15px; /* Agrega bordes redondeados al contenedor principal */
+        overflow-y: auto; /* Permite desplazamiento dentro del contenedor */
+        /* Quitamos el margin: 0 auto; porque ya lo centramos con body/flex */
+        margin: 0; 
+    }
+}
+
+/* 2. Ajuste para pantallas extremadamente pequeñas (ej. iPhone 5) */
+@media (max-width: 320px) {
+    /* Reduce el padding general */
+    .header,
+    .profile-card,
+    .logout-section,
+    .main-nav {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    
+    /* Reduce el tamaño del texto en el nav para evitar desbordamiento */
+    .nav-item span {
+        font-size: 0.6rem;
+    }
+
+    /* Reduce el espacio entre columnas del formulario */
+    .form-grid {
+        gap: 10px;
+    }
+    
+    .form-grid label {
+        font-size: 0.9rem;
+    }
+}
