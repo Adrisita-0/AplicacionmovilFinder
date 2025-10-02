@@ -1,14 +1,16 @@
 const API_AUTH = "http://localhost:8080/api"
 
 // Realiza el inicio de sesión con correo y contraseña
-export async function login({ correo, contrasena }) {
+export async function login({ correoUsuario, contraseñaUsuario }) {
   const r = await fetch(`${API_AUTH}/authLogin`, {
     method: "POST",
     headers: { "Content-Type": "application/json" }, // indica que se envía JSON
     credentials: "include", // incluye cookies en la solicitud
-    body: JSON.stringify({ correo, contrasena }), // credenciales en el cuerpo
+    body: JSON.stringify({ correoUsuario, contraseñaUsuario }), // credenciales en el cuerpo
   });
+
   if (!r.ok) throw new Error(await r.text().catch(() => "")); // lanza error si falla
+  
   return true; // devuelve true en caso de éxito
 }
 
