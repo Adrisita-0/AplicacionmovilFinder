@@ -5,6 +5,7 @@
     --text-color: #333;
     --border-color: #e0e0e0;
     --shadow-light: rgba(0, 0, 0, 0.1);
+    --highlight: #27ae60;
 }
 
 * {
@@ -19,7 +20,7 @@ html,
 body {
     height: 100%;
     overflow: hidden;
-    background-color: var(--light-bg);
+    background: linear-gradient(180deg, #f9f9fb, #eef1f5);
 }
 
 .app-container {
@@ -86,14 +87,16 @@ body {
     padding: 15px 50px 15px 20px;
     border-radius: 50px;
     border: 1px solid var(--border-color);
-    background-color: var(--light-bg);
+    background-color: #fff;
     font-size: 1rem;
     outline: none;
-    transition: box-shadow 0.2s ease;
+    transition: all 0.3s ease;
+    box-shadow: inset 0 2px 5px rgba(0,0,0,0.05);
 }
 
 #search-input:focus {
-    box-shadow: 0 0 0 2px var(--accent-color);
+    border: 1px solid var(--accent-color);
+    box-shadow: 0 0 8px rgba(43, 85, 80, 0.3);
 }
 
 .search-icon {
@@ -149,6 +152,8 @@ body {
 .trending-rooms h3 {
     margin-bottom: 15px;
     font-weight: 600;
+    font-size: 1.5rem;
+    color: var(--primary-color);
 }
 
 .trending-list {
@@ -167,12 +172,17 @@ body {
 .trending-item {
     flex-shrink: 0;
     width: 200px;
-    border-radius: 12px;
+    border-radius: 15px;
     overflow: hidden;
     position: relative;
-    box-shadow: 0 5px 15px var(--shadow-light);
-    text-decoration: none;
-    color: var(--text-color);
+    background: white;
+    box-shadow: 0 4px 12px var(--shadow-light);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.trending-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
 }
 
 .trending-item img {
@@ -180,6 +190,11 @@ body {
     height: 150px;
     object-fit: cover;
     display: block;
+    transition: transform 0.3s ease;
+}
+
+.trending-item:hover img {
+    transform: scale(1.05);
 }
 
 .trending-info {
@@ -190,6 +205,7 @@ body {
     font-size: 1.1rem;
     font-weight: 600;
     margin-bottom: 5px;
+    text-transform: capitalize;
 }
 
 .trending-rating {
@@ -210,33 +226,41 @@ body {
 
 .trending-price {
     font-weight: bold;
-    color: var(--primary-color);
+    color: var(--highlight);
+    font-size: 1rem;
 }
 
 .main-nav {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    padding: 15px;
+    padding: 12px 0;
     background-color: white;
     border-top: 1px solid var(--border-color);
     position: fixed;
     bottom: 0;
+    left: 0;
+    right: 0;
     width: 100%;
-    max-width: 500px;
-    box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.03);
+    box-shadow: 0 -3px 15px rgba(0, 0, 0, 0.05);
     z-index: 100;
 }
+
 
 .nav-item {
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 3px;
+    font-size: 0.75rem;
+    color: #aaa;
     text-decoration: none;
-    color: #888;
-    font-size: 0.8rem;
-    gap: 5px;
-    transition: color 0.3s ease;
+    transition: all 0.3s ease;
+}
+
+.nav-item i {
+    font-size: 1.4rem;
+    transition: transform 0.3s ease, color 0.3s ease;
 }
 
 .nav-item.active {
@@ -244,10 +268,10 @@ body {
     font-weight: 600;
 }
 
-.nav-item i {
-    font-size: 1.3rem;
+.nav-item.active i {
+    transform: scale(1.2);
+    color: var(--accent-color);
 }
-
 
 /* Modal Styles */
 .modal {
@@ -340,7 +364,7 @@ body {
 .modal-price {
     font-size: 1.5rem;
     font-weight: bold;
-    color: var(--primary-color);
+    color: var(--highlight);
     margin-bottom: 20px;
 }
 
@@ -349,7 +373,7 @@ body {
     padding: 15px;
     border: none;
     border-radius: 10px;
-    background-color: var(--primary-color);
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
     color: white;
     font-size: 1.1rem;
     font-weight: 600;
@@ -358,6 +382,13 @@ body {
     align-items: center;
     justify-content: center;
     gap: 10px;
+    transition: background 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.modal-reserve-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.2);
 }
 
 .modal-reserve-btn i {
@@ -391,23 +422,11 @@ body {
 
 /* Animations */
 @keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
 @keyframes slideIn {
-    from {
-        transform: translateY(50px);
-        opacity: 0;
-    }
-
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
+    from { transform: translateY(50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
 }
